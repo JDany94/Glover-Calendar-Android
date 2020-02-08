@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="colorAccent">#536DFE</color>
+
+    <color name="fondoActivity">#BE111111</color>
+    <color name="tvTitulos">#FFFFFF</color>
+    <color name="tvNumeros">#FFFFFF</color>
+</resources>
+

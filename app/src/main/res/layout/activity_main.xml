@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoActivity"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_LogoLogin"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/Boton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/BotonEfectivoMain"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/BotonAltaDemandaMain"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/button_small"
+        android:contentDescription="@string/Boton"
+        android:cropToPadding="false"
+        android:onClick="BotonEfectivo"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BotonAltaDemandaMain"
+        app:srcCompat="@drawable/efectivo" />
+
+    <ImageButton
+        android:id="@+id/BotonAltaDemandaMain"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/iv_LogoLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_small"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonAltaDemanda"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/diamante" />
+
+    <ImageButton
+        android:id="@+id/BotonLogOut"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/BotonEfectivoMain"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/button_small"
+        android:contentDescription="@string/Boton"
+        android:cropToPadding="false"
+        android:onClick="logout"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BotonAltaDemandaMain"
+        app:srcCompat="@drawable/logout" />
+
+</RelativeLayout>

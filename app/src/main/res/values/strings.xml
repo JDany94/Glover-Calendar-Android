@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Glover Calendar</string>
+    <string name="Boton">Boton</string>
+    <string name="tv_AltaDemanda">Alta Demanda</string>
+    <string name="tv_Construccion">En Construccion...</string>
+    <string name="tv_Contador">0</string>
+    <string name="tv_ModificarAltaDemanda">Modificar Alta Demanda</string>
+    <string name="tv_PedidosEnAltaDemanda">Pedidos en\nalta demanda:</string>
+    <string name="tv_VerAltaDemanda">Ver Alta Demanda</string>
+    <string name="iv_Descripcion">Descripcion</string>
+    <string name="tv_SplashScreen">from\n*EGM*</string>
+    <string name="tv_SeleccioneFecha">Seleccione la fecha..</string>
+    <string name="title_activity_boton_flotante">boton_flotante</string>
+    <string name="tv_MesVerAD">MesVerAD</string>
+    <string name="tv_28DiasVerAD">Hace 28 dias:</string>
+    <string name="et_Email">Email..</string>
+    <string name="et_Contrasena">Password..</string>
+    <string name="et_Nombre">Nombre..</string>
+    <string name="et_Tlf">Telefono..</string>
+    <string name="boton_Acceder">Acceder</string>
+    <string name="boton_Registrar">Registrar</string>
+</resources>

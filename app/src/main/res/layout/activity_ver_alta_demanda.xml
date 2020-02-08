@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoActivity"
+    tools:context=".VerAltaDemanda">
+
+    <TextView
+        android:id="@+id/tv_VerAltaDemanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/font_titulos"
+        android:gravity="center"
+        android:text="@string/tv_VerAltaDemanda"
+        android:textColor="@color/tvTitulos"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mes_VerAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_VerAltaDemanda"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_MesVerAD"
+        android:textColor="@color/tvTitulos"
+        android:textSize="18sp" />
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:id="@+id/calendar_View"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@+id/tv_mes_VerAD"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:compactCalendarBackgroundColor="@color/colorPrimary"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorPrimaryDark"
+        app:compactCalendarCurrentDayBackgroundColor="@color/colorPrimaryDark"
+        app:compactCalendarEventIndicatorStyle="no_fill_large_indicator"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+        app:compactCalendarTargetHeight="220dp"
+        app:compactCalendarTextColor="@color/tvNumeros"
+        app:compactCalendarTextSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_PedidosEnAltaDemanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendar_View"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_PedidosEnAltaDemanda"
+        android:textColor="@color/tvTitulos"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_contador_totales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendar_View"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="60dp"
+        android:layout_toEndOf="@+id/tv_PedidosEnAltaDemanda"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_Contador"
+        android:textColor="@color/tvNumeros"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_PedidosEnAltaDemanda" />
+
+    <include layout="@layout/content_boton_flotante" />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/BotonFlotanteVerAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+
+        app:fab_labelStyle="@style/etiquetaBotFlot"
+        app:fab_addButtonColorNormal="@color/colorPrimary"
+        app:fab_addButtonColorPressed="@color/colorPrimaryDark">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/BotonFlotanteAgregarAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_icon="@android:drawable/ic_input_add"
+        app:fab_size="mini"
+        app:fab_colorNormal="@color/colorPrimary"
+        app:fab_title="Agregar Alta Demanda"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/BotonFlotanteModAD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@android:drawable/ic_menu_edit"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_title="Modificar Alta Demanda"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <TextView
+        android:id="@+id/tv_28DiasVerAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_PedidosEnAltaDemanda"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_28DiasVerAD"
+        android:textColor="@color/tvTitulos"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_contador28DiasVerAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_contador_totales"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        android:layout_toEndOf="@+id/tv_28DiasVerAD"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_Contador"
+        android:textColor="@color/tvNumeros"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

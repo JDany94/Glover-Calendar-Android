@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoActivity"
+    tools:context=".AgregarAltaDemanda">
+
+
+    <TextView
+        android:id="@+id/tv_AltaDemanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BotonHelpAD"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="110dp"
+        android:fontFamily="@font/font_titulos"
+        android:gravity="center"
+        android:text="@string/tv_AltaDemanda"
+        android:textColor="@color/tvTitulos"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_contadorAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fecha_AD"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/font_titulos"
+        android:text="@string/tv_Contador"
+        android:textColor="@color/tvNumeros"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/BotonIncrementarAD"
+        app:layout_constraintStart_toEndOf="@+id/BotonDecrementarAD" />
+
+    <ImageButton
+        android:id="@+id/BotonHelpAD"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonHelp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/informacion"
+        android:background="@drawable/button_small"/>
+
+    <ImageButton
+        android:id="@+id/BotonDecrementarAD"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_fecha_AD"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        android:layout_toStartOf="@+id/tv_contadorAD"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonDecrementar"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/restar"
+        android:background="@drawable/button_small"/>
+
+    <ImageButton
+        android:id="@+id/BotonIncrementarAD"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_fecha_AD"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_toEndOf="@+id/tv_contadorAD"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonIncrementar"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/anadir"
+        android:background="@drawable/button_small"/>
+
+    <ImageButton
+        android:id="@+id/BotonGuardarAD"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_contadorAD"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonGuardar"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_contadorAD"
+        app:srcCompat="@drawable/check"
+        android:background="@drawable/button_small"/>
+
+    <TextView
+        android:id="@+id/tv_fecha_AD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_AltaDemanda"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="@font/font_titulos"
+        android:gravity="center"
+        android:text="@string/tv_SeleccioneFecha"
+        android:textColor="@color/tvNumeros"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/BotonFechaAD"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_AltaDemanda"
+        android:layout_marginStart="-85dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/tv_fecha_AD"
+        android:contentDescription="@string/Boton"
+        android:onClick="BotonFecha"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/calendario"
+        android:background="@drawable/button_small"/>
+</RelativeLayout>
