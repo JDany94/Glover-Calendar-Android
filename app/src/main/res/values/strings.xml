@@ -19,4 +19,5 @@
     <string name="et_Tlf">Telefono..</string>
     <string name="boton_Acceder">Acceder</string>
     <string name="boton_Registrar">Registrar</string>
+    <string name="tv_olvidoContrasena">Olvidaste la contraseña?</string>
 </resources>
