@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -16,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dany.glovercalendar.utilidades.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -45,6 +52,7 @@ public class LoginScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.et_PasswAcceder);
         olvidoContrasena = (TextView) findViewById(R.id.tv_olvidarContrasena);
         pb = (ProgressBar) findViewById(R.id.progressBar_login);
+
         fAuth = FirebaseAuth.getInstance();
 
         if(fAuth.getCurrentUser() != null){
@@ -84,14 +92,12 @@ public class LoginScreen extends AppCompatActivity {
 
                     }
                 });
-
                 passwordResetDialog.create().show();
-
             }
         });
-
     }
 
+    //Boton acceder
     public void Acceder (View view) {
 
         String mEmail = email.getText().toString().trim();
@@ -128,7 +134,9 @@ public class LoginScreen extends AppCompatActivity {
 
     }
 
+    //Boton registro
     public void Registro (View view) {
         startActivity( new Intent(LoginScreen.this, RegisterScreen.class));
     }
+
 }

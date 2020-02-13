@@ -76,7 +76,6 @@ public class VerAltaDemanda extends AppCompatActivity {
         // Arreglar el tiempo de mustra
         listaAltaDemanda = llenarListaConFireBase(); // Se carga la lista con la base de datos de fire base
                                                     // Se carga el calendario y se muestra 28dias atras
-                                                    // Elimina la alta demanda que ya no entra en los ultimos 28 dias
 
         // Ver alta demanda de cada dia al clickear en el
         calendario.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -176,15 +175,6 @@ public class VerAltaDemanda extends AppCompatActivity {
             tv_contador28Dias.setText("-");
     }
 
-    private void eliminarAltaDemandaVieja() {
-        for (int i = 0; i < listaAltaDemanda.size(); i++){
-            if (!Utility.fechaValida(listaAltaDemanda.get(i).getFecha())) {
-                String id = listaAltaDemanda.get(i).getId();
-                altaDemanda.document(id).delete();
-            }
-        }
-    }
-
     private ArrayList<AltaDemanda> llenarListaConFireBase (){
 
         final ArrayList<AltaDemanda> lista;
@@ -198,7 +188,6 @@ public class VerAltaDemanda extends AppCompatActivity {
                     lista.add(registro);
                 }
                 pb.setVisibility(View.INVISIBLE);
-                eliminarAltaDemandaVieja();
                 cargarCalendario();
                 verHace28Dias();
             }

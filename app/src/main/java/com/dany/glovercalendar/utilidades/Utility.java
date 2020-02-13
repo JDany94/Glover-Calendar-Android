@@ -1,6 +1,7 @@
 package com.dany.glovercalendar.utilidades;
 
 import java.io.Serializable;
+import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -16,13 +17,16 @@ public class Utility implements Serializable {
     public static final String AD = "alta demanda";
     public static final String EF = "efectivo";
 
+    public static final String UPDATE = "update";
+    public static final String VERSION = "version";
+    public static final String LINK = "link";
+
     public static final String BUNDLE = "bundle";
 
     public static final String EVENT_COLOR_NORMAL = "#FD3434";
     public static final String EVENT_COLOR_ESPECIAL = "#FDDC34";
 
     // Funciones utiles
-
     public static String printFecha (Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("E dd/MM/yyyy");
         return sdf.format(date);
