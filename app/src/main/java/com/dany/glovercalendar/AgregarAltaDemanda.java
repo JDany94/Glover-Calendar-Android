@@ -13,20 +13,28 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dany.glovercalendar.entidades.ConexionSQLiteHelper;
 import com.dany.glovercalendar.entidades.AltaDemanda;
 import com.dany.glovercalendar.utilidades.DatePickerFragment;
 import com.dany.glovercalendar.utilidades.Utility;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private TextView tv_Contador, tv_Fecha;
-    private String dia_Semana, dia_Mes, mes, anio;
+    Date fecha;
     ArrayList<AltaDemanda> listaAltaDemanda;
-    ConexionSQLiteHelper bd;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+
+    private String userID;
+    private CollectionReference altaDemanda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +44,14 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
         tv_Fecha = (TextView)findViewById(R.id.tv_fecha_AD);
         tv_Contador = (TextView)findViewById(R.id.tv_contadorAD);
 
-        bd = new ConexionSQLiteHelper(getApplicationContext());
-        listaAltaDemanda = bd.selectAllFromAD();
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        userID = fAuth.getCurrentUser().getUid();
+        altaDemanda = fStore.collection(Utility.USERS).document(userID).collection(Utility.AD);
+
+        Bundle bundle = getIntent().getExtras();
+        listaAltaDemanda = (ArrayList<AltaDemanda>) bundle.getSerializable(Utility.BUNDLE);
     }
 
     //Boton para seleccionar la fecha
@@ -47,17 +61,8 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
     }
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-        dia_Semana = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        dia_Mes = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        mes = String.valueOf(c.get(Calendar.MONTH ) + 1);
-        anio = String.valueOf(c.get(Calendar.YEAR));
-
-        tv_Fecha.setText(Utility.printFecha(dia_Semana,dia_Mes,mes,anio));
+        fecha = new Date(year - 1900, month, dayOfMonth);
+        tv_Fecha.setText(Utility.printFecha(fecha));
     }
 
     //Boton para incrementar contador
@@ -78,19 +83,28 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
         }
     }
 
-    //Boton para guardar
-    public void BotonGuardar (View view) {
+    //Boton Help
+    public void BotonHelp (View view) {
+        startActivity(new Intent(this, Help.class));
+    }
+
+    //Boton Database Firebase
+    public void Guardar (View view) {
         if (tv_Fecha.getText().equals("Seleccione la fecha..")) {
             Toast.makeText(this, "Falta llenar algunos campos..", Toast.LENGTH_SHORT).show();
         } else {
-            if (Utility.fechaValida(dia_Semana, dia_Mes, mes, anio)) {
-                if (diaSinAltaDemanda(dia_Mes, mes, anio)) {
+            if (Utility.fechaValida(fecha)) {
+                if (diaSinAltaDemanda(fecha)) {
 
-                    bd.insertarAD(dia_Semana, dia_Mes, mes, anio, tv_Contador.getText().toString());
+                    DocumentReference documentReference = altaDemanda.document();
+                    String idFecha = documentReference.getId();
+                    String pedidos = tv_Contador.getText().toString();
+                    AltaDemanda registro = new AltaDemanda(idFecha, fecha, pedidos);
+                    documentReference.set(registro);
 
                     Toast.makeText(this, "Alta Demanda Registrada", Toast.LENGTH_SHORT).show();
-                    Intent volver = new Intent(this, VerAltaDemanda.class);
-                    startActivity(volver);
+
+                    startActivity(new Intent(this, VerAltaDemanda.class));
                     finish();
 
                 } else {
@@ -100,12 +114,10 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
                             .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
-                                    AltaDemanda registro = bd.buscarRegistro(dia_Mes, mes, anio);
-
+                                    AltaDemanda registro = buscarRegistro(fecha);
                                     Intent intent = new Intent(AgregarAltaDemanda.this, EmergenteModAltaDemanda.class);
                                     Bundle bundle = new Bundle();
-                                    bundle.putSerializable("registro", registro);
+                                    bundle.putSerializable(Utility.BUNDLE, registro);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
                                     finish();
@@ -129,19 +141,23 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
         }
     }
 
-    //Boton Help
-    public void BotonHelp (View view) {
-        Intent help = new Intent(this, Help.class);
-        startActivity(help);
+    private AltaDemanda buscarRegistro(Date fecha) {
+        AltaDemanda registro = new AltaDemanda();
+        for (int i = 0; i < listaAltaDemanda.size(); i++) {
+            if (listaAltaDemanda.get(i).getFecha().equals(fecha)) {
+                registro = listaAltaDemanda.get(i);
+                return registro;
+            }
+        }
+        return registro;
     }
 
-    private boolean diaSinAltaDemanda (String dia_Mes, String mes, String anio) {
+    private boolean diaSinAltaDemanda (Date date) {
         for (int i = 0; i < listaAltaDemanda.size(); i++) {
-            if (listaAltaDemanda.get(i).getDia_mes().equals(dia_Mes) && listaAltaDemanda.get(i).getMes().equals(mes) && listaAltaDemanda.get(i).getAnio().equals(anio)) {
+            if (listaAltaDemanda.get(i).getFecha().equals(date)) {
                 return false;
             }
         }
         return true;
     }
-
 }

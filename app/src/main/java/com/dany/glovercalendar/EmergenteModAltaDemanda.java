@@ -11,19 +11,27 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dany.glovercalendar.entidades.ConexionSQLiteHelper;
 import com.dany.glovercalendar.entidades.AltaDemanda;
 import com.dany.glovercalendar.utilidades.DatePickerFragment;
 import com.dany.glovercalendar.utilidades.Utility;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private TextView tv_Contador, tv_Fecha;
-    private String dia_Semana, dia_Mes, mes, anio;
-    ConexionSQLiteHelper bd;
-    String [] idBuscado;
+    AltaDemanda registro;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+
+    private String userID;
+    private CollectionReference altaDemanda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +41,18 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
         tv_Contador = (TextView)findViewById(R.id.tv_contador_ModAD);
         tv_Fecha = (TextView)findViewById(R.id.tv_Fecha_ModAD);
 
-        bd = new ConexionSQLiteHelper(getApplicationContext());
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
-        Bundle registroEnviado = getIntent().getExtras();
-        AltaDemanda registro = null;
+        userID = fAuth.getCurrentUser().getUid();
+        altaDemanda = fStore.collection(Utility.USERS).document(userID).collection(Utility.AD);
 
-        if (registroEnviado!=null){
-            registro = (AltaDemanda) registroEnviado.getSerializable("registro");
+        Bundle bundle = getIntent().getExtras();
 
-            dia_Semana = registro.getDia_semana();
-            dia_Mes = registro.getDia_mes();
-            mes = registro.getMes();
-            anio = registro.getAnio();
-            tv_Fecha.setText(Utility.printFecha(dia_Semana, dia_Mes, mes ,anio));
-            tv_Contador.setText(registro.getPedidos());
+        registro = (AltaDemanda) bundle.getSerializable(Utility.BUNDLE);
 
-            String [] id = {registro.getId()};
-            idBuscado = id;
-        } else {
-            Toast.makeText(this, "vacio", Toast.LENGTH_SHORT).show();
-        }
+        tv_Fecha.setText(Utility.printFecha(registro.getFecha()));
+        tv_Contador.setText(registro.getPedidos());
     }
 
     //Boton para incrementar contador
@@ -75,7 +75,14 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
 
     //Boton para guardar cambio
     public void BotonGuardarCambio (View view) {
-        bd.updatePorID_AD(dia_Semana, dia_Mes, mes, anio, tv_Contador.getText().toString(), idBuscado);
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("id", registro.getId());
+        map.put("fecha", registro.getFecha());
+        map.put("pedidos", tv_Contador.getText().toString());
+
+        altaDemanda.document(registro.getId()).update(map);
+
         Toast.makeText(this, "Cambios Guardados.", Toast.LENGTH_SHORT).show();
         Intent volver = new Intent(this, VerAltaDemanda.class);
         startActivity(volver);
@@ -89,28 +96,18 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
     }
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-        dia_Semana = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        dia_Mes = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        mes = String.valueOf(c.get(Calendar.MONTH) + 1);
-        anio = String.valueOf(c.get(Calendar.YEAR));
-
-        tv_Fecha.setText(Utility.printFecha(dia_Semana,dia_Mes,mes,anio));
+        registro.setFecha(new Date(year - 1900, month, dayOfMonth));
+        tv_Fecha.setText(Utility.printFecha(registro.getFecha()));
     }
 
     //Boton para eliminar registro
     public void BotonEliminar (View view) {
 
-        bd.eliminarPorID_AD(idBuscado);
+        altaDemanda.document(registro.getId()).delete();
 
         Toast.makeText(this, "Eliminado.", Toast.LENGTH_SHORT).show();
 
-        Intent volver = new Intent(this, VerAltaDemanda.class);
-        startActivity(volver);
+        startActivity(new Intent(this, VerAltaDemanda.class));
         finish();
     }
 

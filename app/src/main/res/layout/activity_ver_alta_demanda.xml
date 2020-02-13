@@ -148,5 +148,16 @@
         android:textColor="@color/tvNumeros"
         android:textSize="20sp" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_Calendar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/calendar_View"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_toEndOf="@+id/tv_contador_totales"
+        android:visibility="invisible" />
+
 
 </RelativeLayout>

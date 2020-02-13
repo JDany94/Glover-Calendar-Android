@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.dany.glovercalendar.utilidades.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,9 +54,10 @@ public class RegisterScreen extends AppCompatActivity {
     public void Registrar (View view) {
 
         final String mEmail = email.getText().toString().trim();
-        String mPassword = password.getText().toString().trim();
+        final String mPassword = password.getText().toString().trim();
         final String mFullName = fullName.getText().toString();
         final String mPhone = phone.getText().toString();
+        final Date creationDate = new Date();
 
         boolean camposVacios = false;
 
@@ -92,11 +95,12 @@ public class RegisterScreen extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(RegisterScreen.this, "Usuario Creado! Bienvenido", Toast.LENGTH_LONG).show();
                         userID = fAuth.getCurrentUser().getUid();
-                        DocumentReference documentReference = fStore.collection("users").document(userID);
+                        DocumentReference documentReference = fStore.collection(Utility.USERS).document(userID);
                         Map<String,Object> user = new HashMap<>();
                         user.put("fName",mFullName);
                         user.put("email",mEmail);
                         user.put("phone",mPhone);
+                        user.put("creationDate",creationDate);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

@@ -18,21 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
     //Boton de Alta Demanda
     public void BotonAltaDemanda (View view) {
-        Intent verAltaDemanda = new Intent(this, VerAltaDemanda.class);
-        startActivity(verAltaDemanda);
+        startActivity(new Intent(this, VerAltaDemanda.class));
     }
 
     //Boton del VerEfectivo
     public void BotonEfectivo (View view) {
-        Intent efectivo = new Intent(this, VerEfectivo.class);
-        startActivity(efectivo);
+        startActivity(new Intent(this, VerEfectivo.class));
     }
 
     //Boton de Cerrar Sesion
     public void logout (View view) {
         FirebaseAuth.getInstance().signOut();
-        Intent logout = new Intent(this, LoginScreen.class);
-        startActivity(logout);
+        startActivity(new Intent(this, LoginScreen.class));
         finish();
     }
 

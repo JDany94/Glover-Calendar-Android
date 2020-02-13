@@ -1,25 +1,20 @@
 package com.dany.glovercalendar.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class AltaDemanda implements Serializable {
 
     private String id;
-    private String dia_semana;
-    private String dia_mes;
-    private String mes;
-    private String anio;
+    private Date fecha;
     private String pedidos;
 
     public AltaDemanda() {
     }
 
-    public AltaDemanda(String id, String dia_semana, String dia_mes, String mes, String anio, String pedidos) {
+    public AltaDemanda(String id, Date fecha, String pedidos) {
         this.id = id;
-        this.dia_semana = dia_semana;
-        this.dia_mes = dia_mes;
-        this.mes = mes;
-        this.anio = anio;
+        this.fecha = fecha;
         this.pedidos = pedidos;
     }
 
@@ -31,33 +26,13 @@ public class AltaDemanda implements Serializable {
         this.id = id;
     }
 
-    public String getDia_semana() {
-        return dia_semana;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setDia_semana(String dia_semana) {
-        this.dia_semana = dia_semana;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
-
-    public String getDia_mes() {
-        return dia_mes;
-    }
-
-    public void setDia_mes(String dia_mes) {
-        this.dia_mes = dia_mes;
-    }
-
-    public String getMes() {
-        return mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
-    public String getAnio() { return anio; }
-
-    public void setAnio(String anio) { this.anio = anio; }
 
     public String getPedidos() {
         return pedidos;
@@ -66,5 +41,4 @@ public class AltaDemanda implements Serializable {
     public void setPedidos(String pedidos) {
         this.pedidos = pedidos;
     }
-
 }

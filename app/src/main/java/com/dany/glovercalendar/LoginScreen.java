@@ -128,11 +128,7 @@ public class LoginScreen extends AppCompatActivity {
 
     }
 
-
-
     public void Registro (View view) {
         startActivity( new Intent(LoginScreen.this, RegisterScreen.class));
     }
-
-
 }

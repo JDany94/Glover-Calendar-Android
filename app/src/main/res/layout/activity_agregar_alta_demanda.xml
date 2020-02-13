@@ -100,15 +100,15 @@
         android:layout_below="@+id/tv_contadorAD"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
+        android:background="@drawable/button_small"
         android:contentDescription="@string/Boton"
-        android:onClick="BotonGuardar"
+        android:onClick="Guardar"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_contadorAD"
-        app:srcCompat="@drawable/check"
-        android:background="@drawable/button_small"/>
+        app:srcCompat="@drawable/check" />
 
     <TextView
         android:id="@+id/tv_fecha_AD"
