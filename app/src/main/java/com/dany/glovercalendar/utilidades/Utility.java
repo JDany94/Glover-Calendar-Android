@@ -13,25 +13,40 @@ import java.util.Locale;
 public class Utility implements Serializable {
 
     // Firebase
+
+    //Cloud Firestore
     public static final String USERS = "users";
-    public static final String AD = "alta demanda";
-    public static final String EF = "efectivo";
-
-    public static final String UPDATE = "update";
-    public static final String VERSION = "version";
-    public static final String LINK = "link";
-    public static final String PROFILEPICTURE = "profilePicture";
-    public static final String PICTURE = "picture";
-
-    public static final String BUNDLE = "bundle";
 
     public static final String FNAME = "fName";
     public static final String EMAIL = "email";
     public static final String PHONE = "phone";
-    public static final String CREATIONDATE = "creationDate";
+    public static final String CREATION_DATE = "creationDate";
 
+    public static final String AD = "alta demanda";
+    public static final String EF = "efectivo";
+
+    //Realtime Database
+    public static final String UPDATE = "update";
+    public static final String VERSION = "version";
+    public static final String LINK = "link";
+
+    //Storage
+    public static final String PROFILE_PICTURE = "profilePicture";
+    public static final String PICTURE = "picture";
+
+    //Entidades
+    public static final String ID = "id";
+    public static final String FECHA = "fecha";
+    public static final String PEDIDOS = "pedidos";
+    public static final String EFECTIVO = "efectivo";
+
+    public static final String BUNDLE = "bundle";
+
+    //Utilidad para calendario
     public static final String EVENT_COLOR_NORMAL = "#FD3434";
     public static final String EVENT_COLOR_ESPECIAL = "#FDDC34";
+
+    public static final String SELECCIONE_FECHA = "Seleccione la fecha..";
 
     // Funciones utiles
     public static String printFecha (Date date) {

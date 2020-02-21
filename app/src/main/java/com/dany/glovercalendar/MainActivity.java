@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<AltaDemanda> listaAltaDemanda;
 
+    //Firebase
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 

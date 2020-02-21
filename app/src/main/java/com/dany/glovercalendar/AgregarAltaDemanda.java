@@ -27,11 +27,12 @@ import java.util.Date;
 public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private TextView tv_Contador, tv_Fecha;
-    Date fecha;
-    ArrayList<AltaDemanda> listaAltaDemanda;
+    private Date fecha;
+    private ArrayList<AltaDemanda> listaAltaDemanda;
 
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
+    //Firebase
+    private FirebaseAuth fAuth;
+    private FirebaseFirestore fStore;
 
     private String userID;
     private CollectionReference altaDemanda;
@@ -88,14 +89,13 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
         startActivity(new Intent(this, Help.class));
     }
 
-    //Boton Database Firebase
+    //Boton para guardar
     public void Guardar (View view) {
-        if (tv_Fecha.getText().equals("Seleccione la fecha..")) {
-            Toast.makeText(this, "Falta llenar algunos campos..", Toast.LENGTH_SHORT).show();
+        if (tv_Fecha.getText().equals(Utility.SELECCIONE_FECHA)) {
+            Toast.makeText(this, "Faltan campos por llenar..", Toast.LENGTH_SHORT).show();
         } else {
             if (Utility.fechaValida(fecha)) {
                 if (diaSinAltaDemanda(fecha)) {
-
                     DocumentReference documentReference = altaDemanda.document();
                     String idFecha = documentReference.getId();
                     String pedidos = tv_Contador.getText().toString();
@@ -106,10 +106,10 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
 
                     startActivity(new Intent(this, VerAltaDemanda.class));
                     finish();
-
                 } else {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(AgregarAltaDemanda.this);
-                    alerta.setMessage("¿Desea modificarla?")
+                    alerta.setTitle("Este dia ya tiene Alta Demanda registrada..")
+                            .setMessage("¿Desea modificarla?")
                             .setCancelable(false)
                             .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                 @Override
@@ -126,14 +126,13 @@ public class AgregarAltaDemanda extends AppCompatActivity implements DatePickerD
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    tv_Fecha.setText("Seleccione la fecha..");
+                                    tv_Fecha.setText(Utility.SELECCIONE_FECHA);
                                     tv_Contador.setText("0");
                                     dialog.cancel();
                                 }
                             });
-                    AlertDialog titulo = alerta.create();
-                    titulo.setTitle("Este dia ya tiene Alta Demanda registrada..");
-                    titulo.show();
+                    AlertDialog alert = alerta.create();
+                    alert.show();
                 }
             } else {
                 Toast.makeText(this, "La fecha no pertenece a los ultimos 28 dias..", Toast.LENGTH_LONG).show();

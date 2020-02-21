@@ -22,7 +22,7 @@
         android:fontFamily="@font/font_titulos"
         android:gravity="center"
         android:text="@string/tv_AltaDemanda"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.471"
@@ -38,7 +38,7 @@
         android:layout_marginTop="35dp"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_Contador"
-        android:textColor="@color/tvNumeros"
+        android:textColor="@color/tvLetras"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/BotonIncrementarAD"
         app:layout_constraintStart_toEndOf="@+id/BotonDecrementarAD" />
@@ -126,7 +126,7 @@
         android:fontFamily="@font/font_titulos"
         android:gravity="center"
         android:text="@string/tv_SeleccioneFecha"
-        android:textColor="@color/tvNumeros"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp" />
 
     <ImageButton

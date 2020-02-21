@@ -18,7 +18,7 @@
         android:fontFamily="@font/font_titulos"
         android:gravity="center"
         android:text="@string/tv_VerAltaDemanda"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:layout_marginTop="25dp"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_MesVerAD"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp" />
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
@@ -54,7 +54,7 @@
         app:compactCalendarEventIndicatorStyle="no_fill_large_indicator"
         app:compactCalendarMultiEventIndicatorColor="#fff"
         app:compactCalendarTargetHeight="220dp"
-        app:compactCalendarTextColor="@color/tvNumeros"
+        app:compactCalendarTextColor="@color/tvLetras"
         app:compactCalendarTextSize="12sp" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_PedidosEnAltaDemanda"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -81,7 +81,7 @@
         android:layout_toEndOf="@+id/tv_PedidosEnAltaDemanda"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_Contador"
-        android:textColor="@color/tvNumeros"
+        android:textColor="@color/tvLetras"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tv_PedidosEnAltaDemanda" />
 
@@ -132,7 +132,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_28DiasVerAD"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp" />
 
     <TextView
@@ -145,7 +145,7 @@
         android:layout_toEndOf="@+id/tv_28DiasVerAD"
         android:fontFamily="@font/font_titulos"
         android:text="@string/tv_Contador"
-        android:textColor="@color/tvNumeros"
+        android:textColor="@color/tvLetras"
         android:textSize="20sp" />
 
     <ProgressBar

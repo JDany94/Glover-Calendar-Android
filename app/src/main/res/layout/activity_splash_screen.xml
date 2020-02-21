@@ -27,7 +27,7 @@
         android:fontFamily="@font/font_titulos"
         android:gravity="center"
         android:text="@string/tv_SplashScreen"
-        android:textColor="@color/tvTitulos"
+        android:textColor="@color/tvLetras"
         android:textSize="18sp"
         android:textStyle="bold" />
 

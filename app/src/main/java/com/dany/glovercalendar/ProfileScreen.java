@@ -1,12 +1,16 @@
 package com.dany.glovercalendar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -18,16 +22,20 @@ import com.dany.glovercalendar.entidades.AltaDemanda;
 import com.dany.glovercalendar.utilidades.Utility;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,15 +45,19 @@ public class ProfileScreen extends AppCompatActivity {
     ImageView iv_profile;
     ProgressBar pb;
     ProgressDialog mProgressD;
+    Uri picture;
 
+    //Firebase
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     StorageReference fStorage;
 
     private String userID;
     private DocumentReference userInfo;
+    private StorageReference userPicture;
 
     private static final int GALLERY_INTENT = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +77,43 @@ public class ProfileScreen extends AppCompatActivity {
 
         userID = fAuth.getCurrentUser().getUid();
         userInfo = fStore.collection(Utility.USERS).document(userID);
+        userPicture = fStorage.child(Utility.PROFILE_PICTURE).child(userID).child(Utility.PICTURE);
+
         pb.setVisibility(View.VISIBLE);
 
+        cargarDatosUsuario();
+    }
+
+    private void cargarDatosUsuario() {
+        //Carga los datos del usuario
         userInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                tv_name.setText(documentSnapshot.get(Utility.FNAME).toString()); //STRINGS!!!!!!!!!!!!!!!!!!!!!1
+                tv_name.setText(documentSnapshot.get(Utility.FNAME).toString());
                 tv_mail.setText(documentSnapshot.get(Utility.EMAIL).toString());
                 tv_phone.setText(documentSnapshot.get(Utility.PHONE).toString());
-                pb.setVisibility(View.INVISIBLE);
             }
         });
+        //Carga la imagen de perfil del usuario
+        try {
+            final File file = File.createTempFile("image", "*");
+            userPicture.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    iv_profile.setImageBitmap(bitmap);
+                    pb.setVisibility(View.INVISIBLE);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ProfileScreen.this, "Aún no tienes foto de perfil!", Toast.LENGTH_SHORT).show();
+                    pb.setVisibility(View.INVISIBLE);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Boton cerrar sesion
@@ -90,9 +128,9 @@ public class ProfileScreen extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_INTENT);
-
     }
 
+    //Galeria
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -102,26 +140,19 @@ public class ProfileScreen extends AppCompatActivity {
             mProgressD.setCancelable(false);
             mProgressD.show();
 
-            Uri uri = data.getData();
-            StorageReference filePath = fStorage.child(Utility.PROFILEPICTURE).child(userID).child(Utility.PICTURE);
-            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            picture = data.getData();
+
+            userPicture.putFile(picture).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                     mProgressD.dismiss();
-
-                    Uri asd = taskSnapshot.get
-
                     Glide.with(ProfileScreen.this)
-                            .load(asd)
+                            .load(picture)
                             .fitCenter()
                             .centerCrop()
                             .into(iv_profile);
 
-
                     Toast.makeText(ProfileScreen.this, "Foto de perfil guardada..", Toast.LENGTH_SHORT).show();
-
-
                 }
             });
         }

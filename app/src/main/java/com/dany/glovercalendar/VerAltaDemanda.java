@@ -41,6 +41,7 @@ public class VerAltaDemanda extends AppCompatActivity {
     int contadorDePedidos;
     ProgressBar pb;
 
+    //Firebase
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
@@ -73,11 +74,10 @@ public class VerAltaDemanda extends AppCompatActivity {
 
         pb.setVisibility(View.VISIBLE);
 
-        // Arreglar el tiempo de mustra
-        listaAltaDemanda = llenarListaConFireBase(); // Se carga la lista con la base de datos de fire base
+        listaAltaDemanda = llenarListaConFireBase(); // Se carga la lista con la base de datos de Firebase
                                                     // Se carga el calendario y se muestra 28dias atras
 
-        // Ver alta demanda de cada dia al clickear en el
+        // Ver alta demanda de cada dia al clickear en él
         calendario.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {

@@ -28,7 +28,6 @@ public class ModificarAltaDemanda extends AppCompatActivity {
         listViewAltaDemanda = (ListView)findViewById(R.id.lv_ModAltaDemanda);
 
         Bundle bundle = getIntent().getExtras();
-
         listaAltaDemanda = (ArrayList<AltaDemanda>) bundle.getSerializable(Utility.BUNDLE);
 
         cargarListaAD();

@@ -27,9 +27,12 @@ import java.util.Map;
 public class RegisterScreen extends AppCompatActivity {
 
     EditText fullName, email, password, phone;
+    ProgressBar pb;
+
+    //Firebase
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    ProgressBar pb;
+
     String userID;
 
     @Override
@@ -42,6 +45,7 @@ public class RegisterScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.et_PasswRegistrar);
         phone = (EditText) findViewById(R.id.et_TelefonoRegistrar);
         pb = (ProgressBar) findViewById(R.id.progressBar_Register);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
@@ -51,6 +55,7 @@ public class RegisterScreen extends AppCompatActivity {
         }
     }
 
+    // Boton para registrar
     public void Registrar (View view) {
 
         final String mEmail = email.getText().toString().trim();
@@ -93,22 +98,21 @@ public class RegisterScreen extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(RegisterScreen.this, "Usuario Creado! Bienvenido", Toast.LENGTH_LONG).show();
                         userID = fAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = fStore.collection(Utility.USERS).document(userID);
                         Map<String,Object> user = new HashMap<>();
                         user.put(Utility.FNAME,mFullName);
                         user.put(Utility.EMAIL,mEmail);
                         user.put(Utility.PHONE,mPhone);
-                        user.put(Utility.CREATIONDATE,creationDate);
+                        user.put(Utility.CREATION_DATE,creationDate);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
+                                Toast.makeText(RegisterScreen.this, "Usuario Creado! Bienvenido", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(RegisterScreen.this, MainActivity.class));
+                                finish();
                             }
                         });
-                        startActivity(new Intent(RegisterScreen.this, MainActivity.class));
-                        finish();
                     }else {
                         Toast.makeText(RegisterScreen.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         pb.setVisibility(View.INVISIBLE);

@@ -40,8 +40,10 @@ public class LoginScreen extends AppCompatActivity {
 
     TextView olvidoContrasena;
     EditText email, password;
-    FirebaseAuth fAuth;
     ProgressBar pb;
+
+    //Firebase
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,6 @@ public class LoginScreen extends AppCompatActivity {
                 passwordResetDialog.setTitle("Reestablecer Contraseña?");
                 passwordResetDialog.setMessage("Ingresa tu correo:");
                 passwordResetDialog.setView(resetMail);
-
                 passwordResetDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -138,5 +139,4 @@ public class LoginScreen extends AppCompatActivity {
     public void Registro (View view) {
         startActivity( new Intent(LoginScreen.this, RegisterScreen.class));
     }
-
 }

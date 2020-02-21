@@ -5,12 +5,7 @@
     <color name="colorAccent">#536DFE</color>
 
     <color name="fondoActivity">#BE111111</color>
-    <color name="tvTitulos">#FFFFFF</color>
-    <color name="tvNumeros">#FFFFFF</color>
-
-    <color name="graylight">#fafafa</color>
-    <color name="startblue">#09c6df</color>
-    <color name="endblue">#0bcce6</color>
+    <color name="tvLetras">#FFFFFF</color>
 
 </resources>
 

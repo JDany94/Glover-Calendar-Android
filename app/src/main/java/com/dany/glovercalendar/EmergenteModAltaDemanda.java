@@ -27,6 +27,7 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
     private TextView tv_Contador, tv_Fecha;
     AltaDemanda registro;
 
+    //Firebase
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
@@ -48,7 +49,6 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
         altaDemanda = fStore.collection(Utility.USERS).document(userID).collection(Utility.AD);
 
         Bundle bundle = getIntent().getExtras();
-
         registro = (AltaDemanda) bundle.getSerializable(Utility.BUNDLE);
 
         tv_Fecha.setText(Utility.printFecha(registro.getFecha()));
@@ -77,15 +77,14 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
     public void BotonGuardarCambio (View view) {
 
         Map <String, Object> map = new HashMap<>();
-        map.put("id", registro.getId());
-        map.put("fecha", registro.getFecha());
-        map.put("pedidos", tv_Contador.getText().toString());
+        map.put(Utility.ID, registro.getId());
+        map.put(Utility.FECHA, registro.getFecha());
+        map.put(Utility.PEDIDOS, tv_Contador.getText().toString());
 
         altaDemanda.document(registro.getId()).update(map);
 
-        Toast.makeText(this, "Cambios Guardados.", Toast.LENGTH_SHORT).show();
-        Intent volver = new Intent(this, VerAltaDemanda.class);
-        startActivity(volver);
+        Toast.makeText(this, "Cambio guardado!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, VerAltaDemanda.class));
         finish();
     }
 
@@ -102,13 +101,9 @@ public class EmergenteModAltaDemanda extends AppCompatActivity implements DatePi
 
     //Boton para eliminar registro
     public void BotonEliminar (View view) {
-
         altaDemanda.document(registro.getId()).delete();
-
         Toast.makeText(this, "Eliminado.", Toast.LENGTH_SHORT).show();
-
         startActivity(new Intent(this, VerAltaDemanda.class));
         finish();
     }
-
 }

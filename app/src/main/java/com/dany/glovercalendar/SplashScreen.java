@@ -50,9 +50,11 @@ import java.io.InputStream;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private DatabaseReference update;
     private int dataBaseVersion, actualVersion;
     private String link;
+
+    //Firebase
+    private DatabaseReference update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },1500);
+        },1000);
     }
 
     private void versionApp () {
