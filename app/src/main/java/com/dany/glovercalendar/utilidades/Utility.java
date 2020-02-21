@@ -20,8 +20,15 @@ public class Utility implements Serializable {
     public static final String UPDATE = "update";
     public static final String VERSION = "version";
     public static final String LINK = "link";
+    public static final String PROFILEPICTURE = "profilePicture";
+    public static final String PICTURE = "picture";
 
     public static final String BUNDLE = "bundle";
+
+    public static final String FNAME = "fName";
+    public static final String EMAIL = "email";
+    public static final String PHONE = "phone";
+    public static final String CREATIONDATE = "creationDate";
 
     public static final String EVENT_COLOR_NORMAL = "#FD3434";
     public static final String EVENT_COLOR_ESPECIAL = "#FDDC34";

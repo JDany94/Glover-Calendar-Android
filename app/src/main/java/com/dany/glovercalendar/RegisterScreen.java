@@ -97,10 +97,10 @@ public class RegisterScreen extends AppCompatActivity {
                         userID = fAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = fStore.collection(Utility.USERS).document(userID);
                         Map<String,Object> user = new HashMap<>();
-                        user.put("fName",mFullName);
-                        user.put("email",mEmail);
-                        user.put("phone",mPhone);
-                        user.put("creationDate",creationDate);
+                        user.put(Utility.FNAME,mFullName);
+                        user.put(Utility.EMAIL,mEmail);
+                        user.put(Utility.PHONE,mPhone);
+                        user.put(Utility.CREATIONDATE,creationDate);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

@@ -41,21 +41,19 @@ public class MainActivity extends AppCompatActivity {
         eliminarAltaDemandaVieja();
     }
 
-    //Boton de Alta Demanda
+    //Boton Alta Demanda
     public void BotonAltaDemanda (View view) {
         startActivity(new Intent(this, VerAltaDemanda.class));
     }
 
-    //Boton del VerEfectivo
+    //Boton VerEfectivo
     public void BotonEfectivo (View view) {
         startActivity(new Intent(this, VerEfectivo.class));
     }
 
-    //Boton de Cerrar Sesion
-    public void logout (View view) {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(this, LoginScreen.class));
-        finish();
+    //Boton Perfil
+    public void BotonProfile (View view) {
+        startActivity(new Intent(this, ProfileScreen.class));
     }
 
     private void eliminarAltaDemandaVieja() {

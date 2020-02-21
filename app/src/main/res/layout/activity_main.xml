@@ -58,23 +58,24 @@
         app:srcCompat="@drawable/diamante" />
 
     <ImageButton
-        android:id="@+id/BotonLogOut"
+        android:id="@+id/ButtonProfile"
         style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/BotonEfectivoMain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:adjustViewBounds="false"
         android:background="@drawable/button_small"
         android:contentDescription="@string/Boton"
         android:cropToPadding="false"
-        android:onClick="logout"
+        android:onClick="BotonProfile"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BotonAltaDemandaMain"
-        app:srcCompat="@drawable/logout" />
+        app:srcCompat="@drawable/profilebutton" />
 
 </RelativeLayout>
