@@ -83,6 +83,7 @@ android:orientation="vertical">
     <LinearLayout
         android:layout_marginTop="25dp"
         android:orientation="horizontal"
+        android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -99,6 +100,17 @@ android:orientation="vertical">
             android:paddingLeft="20dp"
             android:text="@string/et_Tlf"
             android:fontFamily="@font/font_titulos" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/button_no_border"
+            android:onClick="botonCambiarNum"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/editar" />
     </LinearLayout>
 
     <Button

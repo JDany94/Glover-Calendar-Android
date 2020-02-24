@@ -2,9 +2,11 @@ package com.dany.glovercalendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,7 +40,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileScreen extends AppCompatActivity {
 
@@ -156,5 +161,29 @@ public class ProfileScreen extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    //Boton Cambiar Numero
+    public void botonCambiarNum (View view) {
+        final EditText resetNumber = new EditText(view.getContext());
+        final AlertDialog.Builder numberResetDialog = new AlertDialog.Builder(view.getContext());
+        numberResetDialog.setTitle("Reestablecer numero de telefono?");
+        numberResetDialog.setMessage("Ingresa tu numero:");
+        numberResetDialog.setView(resetNumber);
+        numberResetDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String number = resetNumber.getText().toString();
+                userInfo.update(Utility.PHONE, number);
+                tv_phone.setText(number);
+            }
+        });
+        numberResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        numberResetDialog.create().show();
     }
 }
