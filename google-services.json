@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "655367472760",
+    "firebase_url": "https://glover-calendar.firebaseio.com",
+    "project_id": "glover-calendar",
+    "storage_bucket": "glover-calendar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655367472760:android:6067f06f5cf6eca1024f8d",
+        "android_client_info": {
+          "package_name": "com.dany.glovercalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655367472760-0gmuj0gi70ligo5uvts41cci3spaam9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dany.glovercalendar",
+            "certificate_hash": "84120a8e58a590489f97d218f8f513f4814d0db4"
+          }
+        },
+        {
+          "client_id": "655367472760-00aabs6n4tjrj8onp33fpghlik2epvm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsIb5dRysj8-S81gIcZta8thR1PaqaUsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655367472760-00aabs6n4tjrj8onp33fpghlik2epvm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
